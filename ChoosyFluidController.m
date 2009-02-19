@@ -32,6 +32,8 @@
 	NSEnumerator *applicationDirectoryEnumerator = [applicationsDirectories objectEnumerator];
 	while(path = [applicationDirectoryEnumerator nextObject])
 		[self findFluidInstancesInDirectory:path];
+		
+	NSLog(@"Found: %@", fluidInstances);
 }
 
 - (void)findFluidInstancesInDirectory:(NSString*)path
@@ -41,14 +43,24 @@
 	
 	// Enumerate over the application in the directory
 	NSString *file;
+	NSString *appPath;
+	NSBundle *appBundle;
 	NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
 	while(file = [fileEnumerator nextObject])
 	{
 		if([[file pathExtension] isEqualToString:@"app"])
 		{
-			// Get the full path of the application
-			NSString *appPath = [path stringByAppendingPathComponent:file];
-			NSLog(@"%@", appPath);
+			// Get a bundle object for the application
+			appPath = [path stringByAppendingPathComponent:file];
+			appBundle = [[NSBundle alloc] initWithPath:appPath];
+			
+			// Check the bundle identifier
+			NSRange fluidInstanceRange = [[appBundle bundleIdentifier] rangeOfString:@"com.fluidapp.FluidInstance."];
+			if(fluidInstanceRange.location == 0)
+				[fluidInstances addObject:appPath];
+			
+			// Tidy up
+			[appBundle release], appBundle = nil;
 		
 			// Don't descend into app's contents
 			[fileEnumerator skipDescendents];
