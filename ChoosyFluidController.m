@@ -41,6 +41,18 @@
 	
 	// Select all fluid instances
 	[fluidInstancesController setSelectedObjects:[fluidInstancesController arrangedObjects]];
+	
+	// Alert the user if we didn't find anything
+	if([[fluidInstancesController arrangedObjects] count] == 0)
+	{
+		NSRunCriticalAlertPanel(
+		   @"No Fluid instances were found",
+		   @"Either you don't have any Fluid instances or you already have Choosy rules set up for all of them",
+		   nil,
+		   nil,
+		   nil
+		);
+	}
 }
 
 - (void)findFluidInstancesInDirectory:(NSString*)path
@@ -115,6 +127,20 @@
 			[subpredicates addObject:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"URL LIKE \"%@\"", [pattern objectForKey:@"value"]]]];
 
 		NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:subpredicates];
+		
+		// Check the predicate is valid
+		if(!predicate || [[(NSCompoundPredicate*)predicate subpredicates] count] < 1)
+		{
+			NSRunCriticalAlertPanel(
+			   [NSString stringWithFormat:@"Failed to create a Choosy behaviour rule for %@", fluidInstance.name],
+			   @"ChoosyFluid wasn't able to get enough information from Fluid's preferences to create this rule",
+			   @"Continue",
+			   nil,
+			   nil
+			);
+
+			continue;
+		}
 		
 		// Create the Choosy behaviour
 		NSDictionary *choosyBehaviour = [NSDictionary dictionaryWithObjectsAndKeys:
