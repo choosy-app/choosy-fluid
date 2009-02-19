@@ -13,6 +13,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		C65225B80F4D1FE1000774A9 /* ChoosyFluidController.m in Sources */ = {isa = PBXBuildFile; fileRef = C65225B70F4D1FE1000774A9 /* ChoosyFluidController.m */; };
 		C652261B0F4D284E000774A9 /* ChoosyFluidInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = C652261A0F4D284E000774A9 /* ChoosyFluidInstance.m */; };
+		C65226EF0F4D48D5000774A9 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = C65226EE0F4D48D5000774A9 /* Credits.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C65225B70F4D1FE1000774A9 /* ChoosyFluidController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosyFluidController.m; sourceTree = "<group>"; };
 		C65226190F4D284E000774A9 /* ChoosyFluidInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosyFluidInstance.h; sourceTree = "<group>"; };
 		C652261A0F4D284E000774A9 /* ChoosyFluidInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosyFluidInstance.m; sourceTree = "<group>"; };
+		C65226EE0F4D48D5000774A9 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				C65226EE0F4D48D5000774A9 /* Credits.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			files = (
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				C65226EF0F4D48D5000774A9 /* Credits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
