@@ -18,6 +18,8 @@
 	NSMutableArray *fluidInstances;
 	IBOutlet NSArrayController *fluidInstancesController;
 	NSString *statusMessage;
+	
+	NSMutableArray *choosyBehaviours;
 }
 
 @property(readwrite,retain) NSMutableArray *fluidInstances;
@@ -25,5 +27,6 @@
 
 - (void)findFluidInstancesInDirectory:(NSString*)path;
 - (IBAction)processSelectedFluidInstances:(id)sender;
+- (void)loadChoosyBehaviours;
 
 @end

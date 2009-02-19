@@ -24,6 +24,9 @@
 	// Display the progress panel
 	[NSApp beginSheet:progressPanel	modalForWindow:mainWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
 	[progressBar animate:nil];
+	
+	// Load the Choosy behaviours
+	[self loadChoosyBehaviours];
 		
 	// Begin the search for fluid instances in all possible directories
 	NSArray *applicationsDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSAllDomainsMask, TRUE);
@@ -126,9 +129,23 @@
 	[progressPanel orderOut:nil];
 }
 
+- (void)loadChoosyBehaviours
+{
+	// Load the property list from disk
+	NSString *advancedBehavioursPath = [@"~/Library/Application Support/Choosy/behaviours.plist" stringByExpandingTildeInPath];
+	NSData *loadedData = [NSData dataWithContentsOfFile:advancedBehavioursPath];
+	
+	// Convert to an array of NSDictionaries
+	NSArray *loadedBehaviours = [NSPropertyListSerialization propertyListFromData:loadedData mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:NULL];
+	
+	// Get a mutable copy
+	[choosyBehaviours release], choosyBehaviours = [loadedBehaviours mutableCopy];
+}
+
 - (void)dealloc
 {
 	[fluidInstances release], fluidInstances = nil;
+	[choosyBehaviours release], choosyBehaviours = nil;
 	[super dealloc];
 }
 
