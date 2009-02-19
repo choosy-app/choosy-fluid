@@ -28,5 +28,6 @@
 - (void)findFluidInstancesInDirectory:(NSString*)path;
 - (IBAction)processSelectedFluidInstances:(id)sender;
 - (void)loadChoosyBehaviours;
+- (void)saveChoosyBehaviours;
 
 @end

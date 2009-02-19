@@ -125,11 +125,14 @@
 			fluidInstance.path, @"behaviourArgument",
 			nil];
 		
-		NSLog(@"Choosy Behaviour: %@", choosyBehaviour);
+		[choosyBehaviours addObject:choosyBehaviour];
 		
 		// Remove the Fluid instance from the table
 		[fluidInstancesController removeObject:fluidInstance];
 	}
+	
+	// Write the updated Choosy behaviours to disk
+	[self saveChoosyBehaviours];
 	
 	// Hide the progress panel
 	[NSApp endSheet:progressPanel];
@@ -147,6 +150,13 @@
 	
 	// Get a mutable copy
 	[choosyBehaviours release], choosyBehaviours = [loadedBehaviours mutableCopy];
+}
+
+- (void)saveChoosyBehaviours
+{
+	NSString *advancedBehavioursPath = [@"~/Library/Application Support/Choosy/behaviours.plist" stringByExpandingTildeInPath];
+	NSData *saveData = [NSPropertyListSerialization dataFromPropertyList:choosyBehaviours format:NSPropertyListXMLFormat_v1_0 errorDescription:NULL];
+	[saveData writeToFile:advancedBehavioursPath atomically:TRUE];
 }
 
 - (void)dealloc
