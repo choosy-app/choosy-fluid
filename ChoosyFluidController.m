@@ -96,7 +96,26 @@
 		// Read the Fluid instance's preferences to get the URL pattern
 		NSArray *matchingURLPatterns = [fluidInstance matchingURLPatterns];
 		
-		//TODO: Create the Choosy behaviour
+		// Build predicate for the rule
+		NSMutableArray *subpredicates = [NSMutableArray arrayWithCapacity:[matchingURLPatterns count]];
+		
+		NSDictionary *pattern;
+		NSEnumerator *patternEnumerator = [matchingURLPatterns objectEnumerator];
+		while(pattern = [patternEnumerator nextObject])
+			[subpredicates addObject:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"URL LIKE \"%@\"", [pattern objectForKey:@"value"]]]];
+
+		NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:subpredicates];
+		
+		// Create the Choosy behaviour
+		NSDictionary *choosyBehaviour = [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSString stringWithFormat:@"Fluid: Use the \"%@\" site specific browser", fluidInstance.name], @"title",
+			[predicate predicateFormat], @"predicate",
+			[NSNumber numberWithBool:TRUE], @"enabled",
+			[NSNumber numberWithInt:6], @"behaviour",
+			fluidInstance.path, @"behaviourArgument",
+			nil];
+		
+		NSLog(@"Choosy Behaviour: %@", choosyBehaviour);
 		
 		// Remove the Fluid instance from the table
 		[fluidInstancesController removeObject:fluidInstance];
