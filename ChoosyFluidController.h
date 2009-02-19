@@ -24,5 +24,6 @@
 @property(readwrite,retain) NSString *statusMessage;
 
 - (void)findFluidInstancesInDirectory:(NSString*)path;
+- (IBAction)processSelectedFluidInstances:(id)sender;
 
 @end

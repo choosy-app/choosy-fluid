@@ -36,8 +36,8 @@
 	[NSApp endSheet:progressPanel];
 	[progressPanel orderOut:nil];
 	
-	NSLog(@"Array: %@", fluidInstances);
-	NSLog(@"Controller's arranged version: %@", [fluidInstancesController arrangedObjects]);
+	// Select all fluid instances
+	[fluidInstancesController setSelectedObjects:[fluidInstancesController arrangedObjects]];
 }
 
 - (void)findFluidInstancesInDirectory:(NSString*)path
@@ -77,6 +77,33 @@
 		}
 	}
 	
+}
+
+- (IBAction)processSelectedFluidInstances:(id)sender
+{
+	// Update the UI's status message
+	self.statusMessage = @"Creating Choosy behaviour rules";
+
+	// Display the progress panel
+	[NSApp beginSheet:progressPanel	modalForWindow:mainWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
+	[progressBar animate:nil];
+	
+	// Create Choosy behaviour rules for each Fluid instance
+	ChoosyFluidInstance *fluidInstance;
+	NSEnumerator *fluidInstanceEnumerator = [[fluidInstancesController selectedObjects] objectEnumerator];
+	while(fluidInstance = [fluidInstanceEnumerator nextObject])
+	{
+		//TODO: Read the Fluid instance's preferences to get the URL pattern
+		
+		//TODO: Create the Choosy behaviour
+		
+		// Remove the Fluid instance from the table
+		[fluidInstancesController removeObject:fluidInstance];
+	}
+	
+	// Hide the progress panel
+	[NSApp endSheet:progressPanel];
+	[progressPanel orderOut:nil];
 }
 
 - (void)dealloc
