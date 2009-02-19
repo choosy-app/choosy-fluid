@@ -22,14 +22,39 @@
 	
 	// Display the progress panel
 	[NSApp beginSheet:progressPanel	modalForWindow:mainWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
+	
+	// Begin the progress bar animation
+	[progressBar animate:nil];
 		
-	// Begin the search for fluid instances
-	[self findFluidInstances];
+	// Begin the search for fluid instances in all possible directories
+	NSArray *applicationsDirectories = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSAllDomainsMask, TRUE);
+	NSString *path;
+	NSEnumerator *applicationDirectoryEnumerator = [applicationsDirectories objectEnumerator];
+	while(path = [applicationDirectoryEnumerator nextObject])
+		[self findFluidInstancesInDirectory:path];
 }
 
-- (void)findFluidInstances
+- (void)findFluidInstancesInDirectory:(NSString*)path
 {
-	self.statusMessage = @"Searching for Fluid instances";
+	// Update the UI's status message
+	self.statusMessage = [NSString stringWithFormat:@"Searching for Fluid instances in %@", path];
+	
+	// Enumerate over the application in the directory
+	NSString *file;
+	NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
+	while(file = [fileEnumerator nextObject])
+	{
+		if([[file pathExtension] isEqualToString:@"app"])
+		{
+			// Get the full path of the application
+			NSString *appPath = [path stringByAppendingPathComponent:file];
+			NSLog(@"%@", appPath);
+		
+			// Don't descend into app's contents
+			[fileEnumerator skipDescendents];
+		}
+	}
+	
 }
 
 @end

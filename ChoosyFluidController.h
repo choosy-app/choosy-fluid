@@ -13,6 +13,7 @@
 {
 	IBOutlet NSWindow *mainWindow;
 	IBOutlet NSPanel *progressPanel;
+	IBOutlet NSProgressIndicator *progressBar;
 	
 	NSMutableArray *fluidInstances;
 	NSString *statusMessage;
@@ -21,6 +22,6 @@
 @property(readwrite,retain) NSMutableArray *fluidInstances;
 @property(readwrite,retain) NSString *statusMessage;
 
-- (void)findFluidInstances;
+- (void)findFluidInstancesInDirectory:(NSString*)path;
 
 @end
