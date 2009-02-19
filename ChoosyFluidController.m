@@ -7,6 +7,7 @@
 //
 
 #import "ChoosyFluidController.h"
+#import "ChoosyFluidInstance.h"
 
 
 @implementation ChoosyFluidController
@@ -45,6 +46,7 @@
 	NSString *file;
 	NSString *appPath;
 	NSBundle *appBundle;
+	ChoosyFluidInstance *fluidInstance;
 	NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
 	while(file = [fileEnumerator nextObject])
 	{
@@ -57,7 +59,11 @@
 			// Check the bundle identifier
 			NSRange fluidInstanceRange = [[appBundle bundleIdentifier] rangeOfString:@"com.fluidapp.FluidInstance."];
 			if(fluidInstanceRange.location == 0)
-				[fluidInstances addObject:appPath];
+			{
+				fluidInstance = [[ChoosyFluidInstance alloc] initWithPath:appPath];
+				[fluidInstances addObject:fluidInstance];
+				[fluidInstance release], fluidInstance = nil;
+			}
 			
 			// Tidy up
 			[appBundle release], appBundle = nil;
@@ -67,6 +73,12 @@
 		}
 	}
 	
+}
+
+- (void)dealloc
+{
+	[fluidInstances release], fluidInstances = nil;
+	[super dealloc];
 }
 
 @end

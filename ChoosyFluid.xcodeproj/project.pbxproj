@@ -12,6 +12,7 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		C65225B80F4D1FE1000774A9 /* ChoosyFluidController.m in Sources */ = {isa = PBXBuildFile; fileRef = C65225B70F4D1FE1000774A9 /* ChoosyFluidController.m */; };
+		C652261B0F4D284E000774A9 /* ChoosyFluidInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = C652261A0F4D284E000774A9 /* ChoosyFluidInstance.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,8 @@
 		8D1107320486CEB800E47090 /* ChoosyFluid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChoosyFluid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C65225B60F4D1FE1000774A9 /* ChoosyFluidController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosyFluidController.h; sourceTree = "<group>"; };
 		C65225B70F4D1FE1000774A9 /* ChoosyFluidController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosyFluidController.m; sourceTree = "<group>"; };
+		C65226190F4D284E000774A9 /* ChoosyFluidInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosyFluidInstance.h; sourceTree = "<group>"; };
+		C652261A0F4D284E000774A9 /* ChoosyFluidInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosyFluidInstance.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +49,8 @@
 			children = (
 				C65225B60F4D1FE1000774A9 /* ChoosyFluidController.h */,
 				C65225B70F4D1FE1000774A9 /* ChoosyFluidController.m */,
+				C65226190F4D284E000774A9 /* ChoosyFluidInstance.h */,
+				C652261A0F4D284E000774A9 /* ChoosyFluidInstance.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				C65225B80F4D1FE1000774A9 /* ChoosyFluidController.m in Sources */,
+				C652261B0F4D284E000774A9 /* ChoosyFluidInstance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
