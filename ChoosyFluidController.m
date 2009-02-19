@@ -48,6 +48,9 @@
 	// Update the UI's status message
 	self.statusMessage = [NSString stringWithFormat:@"Searching for Fluid instances in %@", path];
 	
+	// Get an array of apps that are already the basis of behaviour rules
+	NSArray *applicationsUsedByRules = [choosyBehaviours valueForKey:@"behaviourArgument"];
+	
 	// Enumerate over the application in the directory
 	NSString *file;
 	NSString *appPath;
@@ -58,8 +61,12 @@
 	{
 		if([[file pathExtension] isEqualToString:@"app"])
 		{
-			// Get a bundle object for the application
+			// Check that there isn't already a Choosy behaviour for this application
 			appPath = [path stringByAppendingPathComponent:file];
+			if([applicationsUsedByRules containsObject:appPath])
+				continue;
+		
+			// Get a bundle object for the application
 			appBundle = [[NSBundle alloc] initWithPath:appPath];
 			
 			// Check the bundle identifier
