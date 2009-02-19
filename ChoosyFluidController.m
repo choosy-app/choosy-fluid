@@ -11,12 +11,25 @@
 
 @implementation ChoosyFluidController
 
-@synthesize fluidInstances;
+@synthesize 
+	fluidInstances,
+	statusMessage;
 
-- (void)awakeFromNib
+- (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
 	// Initialise the array for discovered fluid instances
 	self.fluidInstances = [NSMutableArray array];
+	
+	// Display the progress panel
+	[NSApp beginSheet:progressPanel	modalForWindow:mainWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
+		
+	// Begin the search for fluid instances
+	[self findFluidInstances];
+}
+
+- (void)findFluidInstances
+{
+	self.statusMessage = @"Searching for Fluid instances";
 }
 
 @end
