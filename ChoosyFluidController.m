@@ -23,8 +23,6 @@
 	
 	// Display the progress panel
 	[NSApp beginSheet:progressPanel	modalForWindow:mainWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
-	
-	// Begin the progress bar animation
 	[progressBar animate:nil];
 		
 	// Begin the search for fluid instances in all possible directories
@@ -34,7 +32,12 @@
 	while(path = [applicationDirectoryEnumerator nextObject])
 		[self findFluidInstancesInDirectory:path];
 		
-	NSLog(@"Found: %@", fluidInstances);
+	// Hide the progress panel
+	[NSApp endSheet:progressPanel];
+	[progressPanel orderOut:nil];
+	
+	NSLog(@"Array: %@", fluidInstances);
+	NSLog(@"Controller's arranged version: %@", [fluidInstancesController arrangedObjects]);
 }
 
 - (void)findFluidInstancesInDirectory:(NSString*)path
@@ -57,11 +60,12 @@
 			appBundle = [[NSBundle alloc] initWithPath:appPath];
 			
 			// Check the bundle identifier
-			NSRange fluidInstanceRange = [[appBundle bundleIdentifier] rangeOfString:@"com.fluidapp.FluidInstance."];
-			if(fluidInstanceRange.location == 0)
+			NSString *fluidInstanceBundlePrefix = @"com.fluidapp.FluidInstance.";
+			NSRange fluidInstanceRange = [[appBundle bundleIdentifier] rangeOfString:fluidInstanceBundlePrefix];
+			if(fluidInstanceRange.location == 0 && fluidInstanceRange.length == [fluidInstanceBundlePrefix length])
 			{
 				fluidInstance = [[ChoosyFluidInstance alloc] initWithPath:appPath];
-				[fluidInstances addObject:fluidInstance];
+				[fluidInstancesController addObject:fluidInstance];
 				[fluidInstance release], fluidInstance = nil;
 			}
 			

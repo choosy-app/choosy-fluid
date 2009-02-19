@@ -16,6 +16,7 @@
 	IBOutlet NSProgressIndicator *progressBar;
 	
 	NSMutableArray *fluidInstances;
+	IBOutlet NSArrayController *fluidInstancesController;
 	NSString *statusMessage;
 }
 
