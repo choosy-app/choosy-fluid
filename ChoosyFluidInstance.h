@@ -21,5 +21,6 @@
 @property(readonly,retain) NSImage *icon;
 
 - (id)initWithPath:(NSString*)newPath;
+- (NSArray*)matchingURLPatterns;
 
 @end

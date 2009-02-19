@@ -43,6 +43,29 @@
 	[self didChangeValueForKey:@"icon"];
 }
 
+- (NSArray*)matchingURLPatterns
+{
+	// Find the bundle identifier
+	NSBundle *bundle = [[NSBundle alloc] initWithPath:self.path];
+	NSString *bundleIdentifier = [bundle bundleIdentifier];
+	[bundle release], bundle = nil;
+	
+	CFPropertyListRef value;
+	value = CFPreferencesCopyAppValue((CFStringRef)@"TODMatchingURLPatterns", (CFStringRef)bundleIdentifier);
+	
+	if(value && CFGetTypeID(value) == CFArrayGetTypeID())
+	{
+		NSArray *copy = [(NSArray*)value copy];
+		CFRelease(value);
+		return [copy autorelease];
+	}
+	
+	if(value)
+		CFRelease(value);
+	
+	return nil;
+}
+
 - (void)dealloc
 {
 	[path release], path = nil;

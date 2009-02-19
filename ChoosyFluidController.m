@@ -93,7 +93,8 @@
 	NSEnumerator *fluidInstanceEnumerator = [[fluidInstancesController selectedObjects] objectEnumerator];
 	while(fluidInstance = [fluidInstanceEnumerator nextObject])
 	{
-		//TODO: Read the Fluid instance's preferences to get the URL pattern
+		// Read the Fluid instance's preferences to get the URL pattern
+		NSArray *matchingURLPatterns = [fluidInstance matchingURLPatterns];
 		
 		//TODO: Create the Choosy behaviour
 		
