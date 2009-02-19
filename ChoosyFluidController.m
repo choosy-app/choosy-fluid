@@ -134,6 +134,16 @@
 	// Write the updated Choosy behaviours to disk
 	[self saveChoosyBehaviours];
 	
+	// Restart the Choosy helper applications
+	NSTask *killTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall" arguments:[NSArray arrayWithObject:@"Choosy"]];
+	[killTask waitUntilExit];
+	
+	[[NSWorkspace sharedWorkspace] 
+		launchAppWithBundleIdentifier:@"com.choosyosx.Choosy"
+		options:NSWorkspaceLaunchWithoutActivation
+		additionalEventParamDescriptor:nil
+		launchIdentifier:NULL];
+	
 	// Hide the progress panel
 	[NSApp endSheet:progressPanel];
 	[progressPanel orderOut:nil];
