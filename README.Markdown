@@ -7,4 +7,3 @@ Automatically generates Choosy behaviour rules for Fluid instances.
 * Gives you the option of which Fluid instances to create Choosy rules for
 * Creates the rules and restarts the Choosy helper application to make sure they are loaded
 
-**Note:** While this application will correctly create the relevant Choosy behaviours, using them to launch Fluid instances currently results in the Fluid instance crashing shortly after it has been launched.
